@@ -4,9 +4,6 @@ from app.main import app
 
 client = TestClient(app)
 
-data = {
-    "Name": "PC"
-}
 
 def test_read_companies():
     response = client.get("/company")
@@ -14,7 +11,7 @@ def test_read_companies():
 
 
 def test_post_company():
-    response = client.post("/company", json=data)
+    response = client.post("/company", json={"Name": "PC"})
     assert response.status_code == 201
 
 
@@ -30,12 +27,12 @@ def test_update_company():
     assert response.json() == 'updated'
 
 
-def test_post_seniorityLevel():
+def test_post_seniority_level():
     response = client.post("/seniorityLevel", json={"level": "Junior", "multiplier": 1.2, "time_needed": 5, "company_id":5})
     assert response.status_code == 201
 
 
-def test_update_seniorityLevel():
+def test_update_seniority_level():
     response = client.put("/seniorityLevel/1", json={"level": "Senior", "multiplier": 1.3, "time_needed": 5})
     assert response.status_code == 202
     assert response.json() == 'updated'
@@ -47,7 +44,7 @@ def test_post_employee():
 
 
 
-def test_get_employee_with_fullName():
+def test_get_employee_with_full_name():
     response = client.get("/employeeName")
     assert response.status_code == 200
 

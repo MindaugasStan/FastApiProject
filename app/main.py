@@ -101,7 +101,7 @@ def create(request: schemas.Employee, db: Session = Depends(get_db)):
     exp = {}
     time = generateEmployeeExperience(request.JobStartDate, request.Experience)
     for level in seniority_levels:
-        if (time >= level.time_needed):
+        if time >= level.time_needed:
             exp = level
             continue
     employee = models.Employee(name=request.Name, lastname=request.LastName, jobstartdate=request.JobStartDate,
